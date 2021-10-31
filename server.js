@@ -27,8 +27,16 @@ app.use('/css', express.static(path.resolve(__dirname, "assets/css")));
 app.use('/img', express.static(path.resolve(__dirname, "assets/img")));
 app.use('/js', express.static(path.resolve(__dirname, "assets/js")));
 
-app.get('/', (req, res) => {
+app.get('/', (req, res) => { // set route to index page
     res.render(`index`);
+});
+
+app.get('/add-user', (req, res) => { // set route to add_user page
+    res.render(`add_user`);
+});
+
+app.get('/update-user', (req, res) => { // set route to update_user page
+    res.render(`update_user`);
 });
 
 app.listen(PORT, () => {
