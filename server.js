@@ -5,7 +5,7 @@ const morgan = require('morgan');
 //const { application } = require('express');
 const bodyparser = require("body-parser");
 const path = require('path');
-
+const connectdb = require('./server/database/connection');
 
 dotenv.config({path: `./config.env`}); // seperate the port number from the main source code
 
@@ -13,6 +13,10 @@ const PORT = process.env.PORT || 3000; //listen on the port number otherwise lis
 
 //log requests
 app.use(morgan(`tiny`));
+
+//mongo connection
+connectdb();
+
 
 //parse request to body parse
 app.use(bodyparser.urlencoded({extended: true}));
@@ -27,17 +31,8 @@ app.use('/css', express.static(path.resolve(__dirname, "assets/css")));
 app.use('/img', express.static(path.resolve(__dirname, "assets/img")));
 app.use('/js', express.static(path.resolve(__dirname, "assets/js")));
 
-app.get('/', (req, res) => { // set route to index page
-    res.render(`index`);
-});
-
-app.get('/add-user', (req, res) => { // set route to add_user page
-    res.render(`add_user`);
-});
-
-app.get('/update-user', (req, res) => { // set route to update_user page
-    res.render(`update_user`);
-});
+//load routers
+app.use('/', require('./server/routes/router'));
 
 app.listen(PORT, () => {
     console.log(`Server is listening on PORT ${PORT}`);
