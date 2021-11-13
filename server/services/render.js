@@ -7,5 +7,5 @@ exports.add_user = (req, res) => {
 }
 
 exports.update_user = (req, res) => {
-    res.send('update_user');
+    res.render('update_user');
 }
