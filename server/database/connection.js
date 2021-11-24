@@ -14,6 +14,7 @@ const connectdb = async() => {
     try {
          db = await mongodb.connect(MONGO_URL);
          collection = db.collection('student');
+         console.log('MongoDB connected succsessfully 1\n');
     } catch (err) {
         console.log(err);
         process.exit(1);
